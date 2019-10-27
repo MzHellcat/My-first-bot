@@ -23,10 +23,15 @@ module.exports.execute = async (message, args, bot) => {
                 return message.channel.send(`${member.displayName} sudah memiliki role ${role}!`)
             }
             member.addRole(role.id).catch(error => console.log(error.message));
-            message.channel.send(`${member.displayName} mendapatkan role ${role.name}!`);
+            message.channel.send(`**${member.displayName}** mendapatkan role **${role.name}**!`);
+            
         } else if (args[0] === 'remove'){
-            let member = message.mentions.members.first() || message.guild.members.find(member => member.user.tag === args[1]) || message.guild.members.get(args[1]);
-            let role = message.guild.roles.find(role => role.name == args[2]) || message.guild.roles.find(role => role.id == args[2]) || message.mentions.roles.first();
+            let member = message.mentions.members.first() || 
+                message.guild.members.find(member => member.user.tag === args[1]) || 
+                message.guild.members.get(args[1]);
+            let role = message.guild.roles.find(role => role.name == args[2]) || 
+                message.guild.roles.find(role => role.id == args[2]) ||
+                 message.mentions.roles.first();
             
             //sanity check
             if(!member) return message.reply(`sebutkan dengan jelas member yang ingin dicabut rolenya.`);
@@ -36,7 +41,7 @@ module.exports.execute = async (message, args, bot) => {
                 return message.channel.send(`${member.displayName} tidak memiliki role ${role.name}!`)
             }
             member.removeRole(role.id).catch(error => console.log(error.message));
-            message.channel.send(`Role ${role.name} telah dicabut dari ${member.displayName}`);
+            message.channel.send(`Role **${role.name}** telah dicabut dari **${member.displayName}**`);
         } else return message.reply(`sebutkan perintah role yang diinginkan (add/remove)!`);
     } else return;
 }
