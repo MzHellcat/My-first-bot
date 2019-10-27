@@ -29,7 +29,7 @@ module.exports.execute = async (message, args, bot) => {
         muteEmbed.setTimestamp();
         muteEmbed.setFooter(`Author ID : ${message.author.id}`, message.author.displayAvatarURL, ` | ${bName} ${version}`);
         
-        if(target.roles.has(muteRole.id)){
+        if(!target.roles.has(muteRole.id)){
             return;
         } else {
             target.removeRole(muteRole.id).catch(err=>{

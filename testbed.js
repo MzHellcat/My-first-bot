@@ -26,9 +26,27 @@ for (const file of commandFiles) {
 }
 
 bot.on('message', message => {
-    //cek apakah command diakses dari DM
-    if(!message.content.startsWith(prefix) || message.author.bot || message.channel.type === "dm") return;
+    //filter command dan cek apakah command diakses dari DM
+    if(message.isMentioned(bot.user)) {
+        let filter = m => m.author.id === message.author.id;
+        
+        message.reply(`ada yang perlu saya bantu?`);
+        message.channel.awaitMessages(filter, {
+            max :1,
+            time : 10000
+        })
+        .then(async collected => {
+            if(!collected.size) {
+                message.channel.send(`Tidak ada? Baiklah kalau begitu.`);
+            } else message.reply(`Ngomong kok ke bot.`);
+        })
+        .catch (err => {
+            message.channel.send(`Tidak ada? Baiklah kalau begitu.`);
+        })
+    }
 
+    if(!message.content.startsWith(prefix) /*|| !message.content.has(member.mentions.bot)*/ || message.author.bot || message.channel.type === "dm") return;
+    
     //pembagian argumen menjadi array
     const args = message.content.slice(prefix.length).split(/ +/);
 
