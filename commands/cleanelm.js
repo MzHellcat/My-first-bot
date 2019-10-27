@@ -8,6 +8,7 @@ module.exports={
     restriction : 'Moderator and Admin only'
 }
 module.exports.execute = async (message, args, bot) => {
+    //PALING SULIT DIJELASKAN!!! Males ah
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);

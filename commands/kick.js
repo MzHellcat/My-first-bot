@@ -9,6 +9,8 @@ module.exports = {
 }
 
 module.exports.execute = async (message, args, bot) => {
+    //Sama seperti ban, hanya bedanya pada command ini yang di cek adalah permission "KICK_MEMBERS"
+    //dan mengeksekusi kick terhadap target
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
@@ -28,11 +30,6 @@ module.exports.execute = async (message, args, bot) => {
             return message.reply('kamu tidak dapat melakukan kick diri kamu sendiri!')
             .then(m => m.delete(5000));
         }
-    
-        // if(message.member.roles.find(role => role.id) < target.roles.find(role => role.id)){
-        //     return message.reply('user tersebut memiliki posisi yang lebih tinggi.')
-        //     .then( m => m.delete(5000));
-        // }
         
         if(!args[1]){
             tendang.setDescription(`Alasan : -`);

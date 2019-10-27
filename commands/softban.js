@@ -9,6 +9,8 @@ module.exports = {
 }
 
 module.exports.execute = async (message, args, bot) => {
+    //Sama seperti ban
+    //hanya bedanya ... (lihat bawah)
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0])
@@ -47,7 +49,8 @@ module.exports.execute = async (message, args, bot) => {
                 await target.send(`Kamu telah di-softban dari ${message.guild.name} karena ${args.slice(1).join(" ")}\nTetapi kamu masih bisa join kembali ke server kapanpun kamu mau.`)
                 .catch(err =>{
                     console.log(err);
-
+                    //bot akan mengeksekusi ban terhadap target lalu menghapus seluruh pesan target dalam jangka 7 hari terakhir
+                    //kemudian bot akan langsung mengunban target menggunakan id target tersebut
                     message.guild.ban(target, {days : 7, reason : `${args.slice(1).join(" ")}`})
                     .then(() => message.guild.unban(target.id))
                     .catch(err => {

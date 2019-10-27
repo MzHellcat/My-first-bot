@@ -9,6 +9,7 @@ module.exports = {
 }
 
 module.exports.execute = async (message, args, bot) =>{
+    //declare apa itu member
     let member = message.mentions.members.first() ||
         message.guild.members.find(member => member.user.tag === args[0]) ||
         message.guild.members.get(args[0]);
