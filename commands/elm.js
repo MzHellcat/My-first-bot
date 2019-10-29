@@ -60,14 +60,13 @@ module.exports.execute = async (message, args, bot) => {
                 }
              
                 report.addField(`**Harap kembalikan role tersebut kepada member yang bersangkutan setelah melepas ELM!**`,'\u200b');
-
-                message.author.send(report).catch(err => {
-                    console.log(err);
-                });
                 target.addRole(muteRole.id).catch(err=>{
                     console.log(err);
                     message.channel.send('Terdapat kesulitan saat berusaha mute member tersebut');
                 })
+                message.author.send(report).catch(err => {
+                    console.log(err);
+                });
             }
 
             message.channel.send(muteEmbed).catch(err => {
