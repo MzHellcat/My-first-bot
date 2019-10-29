@@ -43,23 +43,6 @@ module.exports.execute = async (message, args, bot) => {
             if(target.roles.has(muteRole.id)){
                 return message.channel.send(`**${target.displayName}** sudah dimute!`)
             } else {
-                if(target.roles.has(santai.id)) {
-                    target.removeRole(santai.id);
-                } 
-                if(target.roles.has(donatur.id)) {
-                    target.removeRole(donatur.id);
-                    report.addField(`${donatur.name}`,'\u200b');
-                }
-                if(target.roles.has(hnt.id)) {
-                    target.removeRole(hnt.id);
-                    report.addField(`${hnt.name}`,'\u200b');
-                }
-                if(target.roles.has(giveaways.id)) {
-                    target.removeRole(giveaways.id);
-                    report.addField(`${giveaways.name}`,'\u200b');
-                }
-             
-                report.addField(`**Harap kembalikan role tersebut kepada member yang bersangkutan setelah melepas ELM!**`,'\u200b');
                 target.addRole(muteRole.id).catch(err=>{
                     console.log(err);
                     message.channel.send('Terdapat kesulitan saat berusaha mute member tersebut');
