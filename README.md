@@ -1,4 +1,4 @@
-# POS-in-house-bot
-In-house custom bot untuk server POS
+# firstbot
+My first bot
 
-Harap diperthatikan sebelumnya, berikut adalah package yang dibutuhkan untuk menggunakan bot : discord.js, ms (untuk command tempmute)
+Harap diperthatikan sebelumnya, berikut adalah package yang dibutuhkan untuk menggunakan bot : discord.js, ms (untuk command tempmute), dan canvas
