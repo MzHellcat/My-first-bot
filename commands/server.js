@@ -36,6 +36,7 @@ module.exports.execute = async (message, args, bot) => {
     const sinfo = new Discord.RichEmbed()
         .setColor('00c284')
         .setAuthor(message.guild.name, message.guild.iconURL)
+        .setThumbnail(message.guild.iconURL)
         .addField("Nama server", message.guild.name)
         .addField("Server ID", message.guild.id, true)
         .addField("Region", region[message.guild.region], true)
