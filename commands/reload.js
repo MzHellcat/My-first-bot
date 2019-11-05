@@ -4,7 +4,7 @@ module.exports ={
     restriction : 'Bot Owner only'
 }
 module.exports.execute = async (message, args, bot) => {
-    if(message.author.id == "your id here") {
+    if(message.author.id == "433993894422904853") {
         if(!args[0]) return message.channel.send("Sebutkan command yang ingin di reload")
 
         let commandName = args[0].toLowerCase()
@@ -15,6 +15,7 @@ module.exports.execute = async (message, args, bot) => {
             const pull = require(`./${commandName}.js`);
             bot.commands.set(commandName, pull);
         } catch (err){
+            console.log(err);
             return message.channel.send(`Tidak bisa mereload \`${args[0].toLowerCase()}\``);
         }
     

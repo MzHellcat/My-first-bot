@@ -1,6 +1,6 @@
 {
-    "prefix": "s.",
-    "token": "TOKEN GOES HERE",
-    "version": "optional, versioning with SemVer",
-    "bName" : "your bot name"
+    "prefix": "prefix here",
+    "token": "token here",
+    "version": "bot ver",
+    "bName" : "bot name"
 }

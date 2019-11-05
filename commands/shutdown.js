@@ -4,7 +4,7 @@ module.exports ={
     restriction : 'Bot Owner only'
 }
 module.exports.execute = async (message, args, bot) => {
-    if(message.author.id == "your id here") {
+    if(message.author.id == "433993894422904853") {
         try{
             await message.channel.send("Shutting down bot...")
             process.exit()

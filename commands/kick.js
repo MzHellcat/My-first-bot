@@ -40,13 +40,13 @@ module.exports.execute = async (message, args, bot) => {
         tendang.setTimestamp();
         tendang.setFooter(`Author ID : ${message.author.id}`, message.author.displayAvatarURL,` | ${bName} ${version}`);
 
-        message.reply(`Apakah kamu ingin kick **${target.username}** dari ${message.guild.name}?\nKetik \`confirm\` untuk mengeksekusi proses kick!`).then(m => m.delete(7000));
+        message.reply(`Apakah kamu ingin kick **${target.user.username}** dari ${message.guild.name}?\nKetik \`confirm\` untuk mengeksekusi proses kick!`).then(m => m.delete(7000));
         message.channel.awaitMessages(filter, {
             max : 1,
             time : 7000
         })
         .then(async collected => {
-            if(collected.first().content === 'confirm'){
+            if(collected.first() == 'confirm'){
                 await target.send(`Kamu telah dikick dari ${message.guild.name} karena ${args.slice(1).join(" ")}`)
                 .catch(err =>{
                     console.log(err);
@@ -57,7 +57,7 @@ module.exports.execute = async (message, args, bot) => {
                         console.log(error);
                         message.channel.send(`Terdapat kesulitan saat berusahan kick member tersebut!`);
                     })
-                    message.author.send(`Sepertinya **${target.username}** telah mematikan fitur DM`);
+                    message.author.send(`Sepertinya **${target.user.username}** telah mematikan fitur DM`);
                 })
                 target.kick(args.slice(1).join(" "));
 
@@ -67,12 +67,12 @@ module.exports.execute = async (message, args, bot) => {
                     message.channel.send(`Terdapat kesulitan saat berusahan kick member tersebut!`);
                 })
             } else {
-                return message.channel.send(`**${message.author.member.displayName}** telah membatalkan command.`);
+                return message.channel.send(`**${message.guild.member(message.author).displayName}** telah membatalkan command.`);
             }
         })
         .catch (err =>{
             console.log(err);
-            message.channel.send(`**${message.member.displayName}** telah membatalkan command.`);
+            message.channel.send(`**${message.guild.member(message.author).displayName}** telah membatalkan command.`);
         })
     } else return;
 }

@@ -18,6 +18,8 @@ module.exports.execute = async (message, args, bot) => {
         let days = Math.floor(diff / 86400000);
         return days + (days == 1 ? " day" : " days") + " ago";
     };
+
+    //thanks to Ikramullah yang udah bantu masalah map role disini!
     const rls = member.roles.map(role => `<@&${role.id}>`)
     const userRole = new Map()
     let count = 0
@@ -29,10 +31,7 @@ module.exports.execute = async (message, args, bot) => {
         userRole.get(count).push(rls[i])
         }
     }
-    // console.log(rolearr)
-    // userRole.forEach(r => {
-    //   ufoembed.addField('\u200B', r.join(' | '))
-    // })
+
     const ufoembed = new Discord.RichEmbed()
         .setColor('00c284')
         .setAuthor(member.user.tag, member.user.displayAvatarURL)

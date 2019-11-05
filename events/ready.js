@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const {prefix} = require('../config.json');
 
 module.exports = bot => {
-     console.log(`${bot.user.username} is online`)
+    console.log(`${bot.user.username} is online`)
 
     let activity = [
         `${prefix}help`,

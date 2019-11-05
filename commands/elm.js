@@ -11,7 +11,13 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
-    const muteRole =  message.guild.roles.find(role => role.id == extreme mute role id here);
+    const muteRole =  message.guild.roles.find(role => role.id == 505004825621168128);
+    const santai = message.guild.roles.find(role => role.id == 627312787776864276);
+    const donatur = message.guild.roles.find(role => role.id == 438335830726017025);
+    const hnt = message.guild.roles.find(role => role.id == 360232451525574668);
+    const giveaways = message.guild.roles.find(role => role.id == 473869471183011860);
+    const rbk = message.guild.channels.find(ch => ch.id === '505005439792971776');
+
     const muteEmbed = new Discord.RichEmbed()
         .setColor('ff0000')
         .setThumbnail(target.user.displayAvatarURL)
@@ -43,10 +49,27 @@ module.exports.execute = async (message, args, bot) => {
             if(target.roles.has(muteRole.id)){
                 return message.channel.send(`**${target.displayName}** sudah dimute!`)
             } else {
+                if(target.roles.has(santai.id)) {
+                    target.removeRole(santai.id);
+                } 
+                if(target.roles.has(donatur.id)) {
+                    target.removeRole(donatur.id);
+                    report.addField(`${donatur.name}`,'\u200b');
+                }
+                if(target.roles.has(hnt.id)) {
+                    target.removeRole(hnt.id);
+                    report.addField(`${hnt.name}`,'\u200b');
+                }
+                if(target.roles.has(giveaways.id)) {
+                    target.removeRole(giveaways.id);
+                    report.addField(`${giveaways.name}`,'\u200b');
+                }
+                report.addField(`**Harap kembalikan role tersebut kepada member yang bersangkutan setelah melepas ELM!**`,'\u200b');
                 target.addRole(muteRole.id).catch(err=>{
                     console.log(err);
                     message.channel.send('Terdapat kesulitan saat berusaha mute member tersebut');
                 })
+                rbk.send(`Selamat datang di <#${rbk.id}> <@${target.id}>, member yang hanya bisa melihat channel ini artinya sedang dalam hukuman karena telah melanggar sesuatu. Jika anda merasa pernah melakukan sesuatu yang melanggar rules, silahkan beritahu disini agar segera diproses oleh staff dan dapat melanjukan kembali aktivitas chat secara normal.`);
                 message.author.send(report).catch(err => {
                     console.log(err);
                 });

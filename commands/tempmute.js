@@ -12,13 +12,12 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
-    const muteRole =  message.guild.roles.find(role => role.id == your mute role id here);
+    const muteRole =  message.guild.roles.find(role => role.id == 430378151651049486);
     const filter = m => m.author.id === message.author.id;
     const muteEmbed = new Discord.RichEmbed()
         .setColor('00aeff')
         .setThumbnail(target.user.displayAvatarURL)
         .setTitle(`**${target.displayName}** telah berhasil dimute.`)
-        .addField(`Alasan : `, args.slice(1).join(" "))
 
     const reMute = new Discord.RichEmbed()
         .setColor('00aeff')
@@ -38,6 +37,14 @@ module.exports.execute = async (message, args, bot) => {
                 return message.reply('kamu tidak dapat mute diri kamu sendiri!')
                     .then (m => m.delete(5000));
             }
+            
+            if(!args[1]){
+                muteEmbed.addField(`Alasan : -`);
+
+            } else {
+                muteEmbed.addField(`Alasan : `, args.slice(1).join(" "))
+            }
+
             message.reply(`Berapa lama jangka waktunya?`);
             message.channel.awaitMessages(filter, {
                 max : 1,

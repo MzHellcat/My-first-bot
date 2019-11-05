@@ -11,7 +11,7 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
-    const muteRole =  message.guild.roles.find(role => role.id == mute role id here) || message.guild.roles.name("Muted");
+    const muteRole =  message.guild.roles.find(role => role.id == 430378151651049486) || message.guild.roles.name("Muted");
     const muteEmbed = new Discord.RichEmbed()
         .setColor('00aeff')
         .setThumbnail(target.user.displayAvatarURL)

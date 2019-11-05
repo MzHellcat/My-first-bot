@@ -12,7 +12,9 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
-    const muteRole =  message.guild.roles.find(role => role.id == extreme mute role id here);
+    const muteRole =  message.guild.roles.find(role => role.id == 505004825621168128);
+    const santai = message.guild.roles.find(role => role.id == 627312787776864276);
+
     const muteEmbed = new Discord.RichEmbed()
         .setColor('ff0000')
         .setThumbnail(target.user.displayAvatarURL)

@@ -9,8 +9,6 @@ module.exports = {
 }
 
 module.exports.execute = async (message, args, bot) => {
-    //Sama seperti ban
-    //hanya bedanya ... (lihat bawah)
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0])
@@ -40,17 +38,15 @@ module.exports.execute = async (message, args, bot) => {
         banned.setTimestamp();
         banned.setFooter(`Author ID : ${message.author.id}`, message.author.displayAvatarURL,` | ${bName} ${version}`);
 
-        message.reply(`Apakah kamu ingin softban **${target.username}** dari ${message.guild.name}?\nKetik \`confirm\` untuk mengeksekusi proses softban!`).then(m => m.delete(7000));
+        message.reply(`Apakah kamu ingin softban **${target.user.username}** dari ${message.guild.name}?\nKetik \`confirm\` untuk mengeksekusi proses softban!`).then(m => m.delete(7000));
         message.channel.awaitMessages(filter, {
             max : 1,
             time : 7000
         }).then(async collected => {
-            if(collected.first().content === 'confirm'){
+            if(collected.first() == 'confirm'){
                 await target.send(`Kamu telah di-softban dari ${message.guild.name} karena ${args.slice(1).join(" ")}\nTetapi kamu masih bisa join kembali ke server kapanpun kamu mau.`)
                 .catch(err =>{
                     console.log(err);
-                    //bot akan mengeksekusi ban terhadap target lalu menghapus seluruh pesan target dalam jangka 7 hari terakhir
-                    //kemudian bot akan langsung mengunban target menggunakan id target tersebut
                     message.guild.ban(target, {days : 7, reason : `${args.slice(1).join(" ")}`})
                     .then(() => message.guild.unban(target.id))
                     .catch(err => {
@@ -62,7 +58,7 @@ module.exports.execute = async (message, args, bot) => {
                         console.log(error);
                         message.channel.send(`Terdapat kesulitan saat berusahan melakukan tindakan softban kepada member tersebut!`);
                     })
-                message.author.dmChannel.send(`Sepertinya **${target.username}** telah mematikan fitur DM`);
+                message.author.dmChannel.send(`Sepertinya **${target.user.username}** telah mematikan fitur DM`);
                 })                
                 message.guild.ban(target, {days : 7, reason : `${args.slice(1).join(" ")}`})
                     .then(() => message.guild.unban(target.id))
@@ -75,11 +71,11 @@ module.exports.execute = async (message, args, bot) => {
                 message.channel.send(`Terdapat kesulitan saat berusahan melakukan tindakan softban kepada member tersebut!`);
                 })
             } else {
-                return message.channel.send(`**${message.author.member.displayName}** telah membatalkan command.`);
+                return message.channel.send(`**${message.guild.member(message.author).displayName}** telah membatalkan command.`);
             }
         }).catch (err =>{
             console.log(err);
-            message.channel.send(`**${message.member.displayName}** telah membatalkan command.`);
+            message.channel.send(`**${message.guild.member(message.author).displayName}** telah membatalkan command.`);
         })
     } else return;
 }
