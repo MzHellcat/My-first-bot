@@ -11,7 +11,25 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0]);
-    const muteRole =  message.guild.roles.find(role => role.id == 430378151651049486);
+    const muteRole =  message.guild.roles.find(`name`, "Muted");
+    if(!muteRole) {
+        try{
+            muterole = await message.guild.createRole({
+                name : "Muted",
+                color : '#000000',
+                permissions : []
+            });
+            message.guild.channels.forEach(async (channel, id) => {
+                await channel.overwritePermission(muterole, {
+                    SEND_MESSAGES : false,
+                    ADD_REACTIONS : false
+                });
+            });
+        }
+        catch {
+            message.channel.send("Gagal membuat role Mute");
+        }
+    }
     const muteEmbed = new Discord.RichEmbed()
         .setColor('00aeff')
         .setThumbnail(target.user.displayAvatarURL)

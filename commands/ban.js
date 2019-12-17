@@ -12,7 +12,12 @@ module.exports.execute = async (message, args, bot) => {
     const target = message.mentions.members.first() ||
         message.guild.members.get(args[0]) ||
         message.guild.members.find(member => member.user.tag === args[0])
-
+    const attach = [
+        'https://media.giphy.com/media/eLw5pXMEJUjtxiAbfn/source.gif',
+        'https://media.giphy.com/media/WmurdDqWy41uRzYaOY/source.gif',
+        'https://media.giphy.com/media/gFPUyBl9RU9OFrYmVJ/source.gif'
+    ]
+    let i = Math.floor(Math.random() * attach.length);
     const banned = new Discord.RichEmbed() 
         .setColor('#ff2424')
         .setThumbnail(target.user.displayAvatarURL)
@@ -37,6 +42,7 @@ module.exports.execute = async (message, args, bot) => {
         }
         banned.addField(`Staff eksekutor :`, message.author.tag);
         banned.setTimestamp();
+        banned.setImage(attach[i]);
         banned.setFooter(`Author ID : ${message.author.id}`, message.author.displayAvatarURL,` | ${bName} ${version}`);
 
         message.reply(`Apakah kamu ingin ban **${target.user.username}** dari ${message.guild.name}?\nKetik \`confirm\` untuk mengeksekusi proses ban!`).then(m => m.delete(7000));
